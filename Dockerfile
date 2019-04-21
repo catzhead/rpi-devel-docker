@@ -4,8 +4,15 @@ RUN apt-get update
 
 RUN apt-get -y upgrade
 
-# build-essential is for make
-RUN apt-get install -y git bc bison flex libssl-dev build-essential vim qemu
+# minimal package list, rationale:
+# git: obvious
+# bc/bison/flex/libssl-dev: linux kernel compilation
+# build-essential: make
+# vim: obvious
+# qemu: raspberry emulation
+# procps: ps
+# gdb-x: gdb to connect to qemu
+RUN apt-get install -y git bc bison flex libssl-dev build-essential vim qemu procps gdb-multiarch gcc-arm-linux-gnueabihf
 
 # bash customization
 RUN echo PS1=\'\>\> [\\T] \\w \\$ \' >> ~/.bashrc
